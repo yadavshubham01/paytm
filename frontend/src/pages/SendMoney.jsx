@@ -39,9 +39,10 @@ export function SendMoney(){
                             amount
                         },{
                             headers:{
-                                Authorization:"Bearer"+localStorage.getItem("token")
+                                Authorization:"Bearer " + localStorage.getItem("token")
                             }
                         })
+                        alert("Transaction successfull")
                        }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-blue-800 hover:bg-blue-500 text-white">
                         Intiate Transfer
                         </button>

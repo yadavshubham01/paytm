@@ -11,8 +11,8 @@ import axios from "axios";
 
 
 export function Signin(){
-  const [Username,setUsername]=useState("");
-  const [Password,setPassword]=useState("");
+  const [username,setUsername]=useState("");
+  const [password,setPassword]=useState("");
 
   const navigate=useNavigate();
    
@@ -32,10 +32,11 @@ export function Signin(){
         <div className="pt-4">
             <Button onCLick={async() => {
             const response = await axios.post("http://localhost:3000/api/v1/user/signin",{
-                Username,
-                Password
+                username,
+                password
               })
-              localStorage.setItem(response.data)
+              localStorage.setItem("token",response.data.token)
+              console.log(response.data.token)
               navigate("/dashboard")
             }} label={"Sign In"}/>
         </div>

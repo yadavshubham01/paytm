@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 export function Signup(){
   const [firstname,setfirstname]=useState("");
   const [lastname,setlastname]=useState("");
-  const [Username,setUsername]=useState("");
-  const [Password,setPassword]=useState("");
+  const [username,setUsername]=useState("");
+  const [password,setPassword]=useState("");
   const navigate=useNavigate();
     return (
         <div className="bg-gray-100 h-screen flex justify-center">
@@ -34,12 +34,14 @@ export function Signup(){
             <div className="pt-4">
                 <Button onCLick={async() =>{
                    const res= await axios.post("http://localhost:3000/api/v1/user/signup",{
-                        Username,
+                        username,
                         firstname,
                         lastname,
-                        Password
+                        password
                      });
-                     localStorage.setItem("token",JSON.stringify(res.data.token))
+                     console.log(res.data.token)
+                     localStorage.setItem("token",res.data.token)
+                
                      navigate("/dashboard")
                 }} label={"Sign Up"}/>
             </div>

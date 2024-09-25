@@ -4,11 +4,11 @@ import { Users } from "../components/User";
 
 
 export function Dashboard(){
-    return <diV>
+    return <div>
         <Appbar/>
         <div className="m-8">
             <Balance value={"10,000"}/>
             <Users/>
         </div>
-    </diV>
+    </div>
 }

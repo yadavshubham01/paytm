@@ -2,10 +2,10 @@ const mongoose=require("mongoose");
 
 
 
-mongoose.connect("mongodb+srv://shubhamyaadav:zEkHMtxOKHLitQS5@cluster0.pi86b7o.mongodb.net/paytm");
+mongoose.connect("mongodb://localhost:27017/paytm");
 
 
-const paytmSchema=new mongoose.Schema({
+const userSchema=new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -47,7 +47,7 @@ const accountSchema=new mongoose.Schema({
 });
 
 
-const User=mongoose.model('paytm',paytmSchema);
+const User=mongoose.model('User',userSchema);
 const Account=mongoose.model('Account',accountSchema);
 module.exports={
     User,
