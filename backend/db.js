@@ -2,7 +2,7 @@ const mongoose=require("mongoose");
 
 
 
-mongoose.connect("mongodb://localhost:27017/paytm");
+mongoose.connect("mongodb+srv://shubhamyaadav:zEkHMtxOKHLitQS5@cluster0.pi86b7o.mongodb.net/paym");
 
 
 const userSchema=new mongoose.Schema({
