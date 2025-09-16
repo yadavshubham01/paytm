@@ -6,3 +6,4 @@ Users can register, log in, and perform secure transactions, transferring funds 
 – The app includes features like viewing transaction history, checking balances, and adding beneficiaries. With
 robust user authentication and session management, the application ensures secure money transfers
 – Technology Used : JavaScript , Node.js , Tailwind CSS, Docker , Express.js , React.js
+ 
