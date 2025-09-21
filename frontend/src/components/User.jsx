@@ -3,17 +3,28 @@ import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+function useDebouce(value , delay=300){
+    const [V ,setV] = useState(value)
+
+    useEffect(() =>{
+       const id = setTimeout(()=> setV(value),delay)
+       return () => clearTimeout(id);
+    },[value,delay])
+
+    return V;
+}
 
 export const Users = () =>{
     const [users,setUsers] =useState([]);
     const [filter,setFilter]= useState("");
+    const debouncedQuery = useDebouce(filter, 350);
       
     useEffect(() =>{
-        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
+        axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + debouncedQuery)
          .then(response =>{
             setUsers(response.data.user)
          })
-    },[filter])
+    },[debouncedQuery])
      
     return <>
         <div className="font-semibold mt-6 text-lg">
@@ -22,7 +33,7 @@ export const Users = () =>{
         <div className="my-2">
             <input onChange={(e) =>{
                 setFilter(e.target.value)
-            }} type="text" placeholder="Search users..." className="w-full px-2 py-1 border rounded border-slate-200"/>
+            }} type="text" placeholder="Search users..." className="w-[30%] px-2 py-1 border rounded border-slate-200"/>
         </div>
         <div>
             {users.map((user) => <User user={user}/>)}

@@ -41,8 +41,9 @@ export function Signup(){
                      });
                      console.log(res.data.token)
                      localStorage.setItem("token",res.data.token)
-                
+                     if(res){ 
                      navigate("/dashboard")
+                     }else alert("err",res)
                 }} label={"Sign Up"}/>
             </div>
             <ButtonWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />

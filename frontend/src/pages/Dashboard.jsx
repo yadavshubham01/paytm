@@ -3,9 +3,11 @@ import { Appbar } from "../components/Appbar";
 import { Balance } from "../components/Balance";
 import { Users } from "../components/User";
 import axios from "axios";
+import { History } from "../components/History";
 
 export function Dashboard(){
     const [balance, setBalance] = useState(null);
+    const [ active ,setActive] = useState("users");
 
     useEffect(() => {
         axios.get("http://localhost:3000/api/v1/account/balance", {
@@ -21,10 +23,11 @@ export function Dashboard(){
         });
     }, []);
     return <div>
-        <Appbar/>
+        <Appbar setActive={setActive}/>
         <div className="m-8">
             <Balance value={balance}/>
-            <Users/>
+           {active === "users" && <Users/> }
+           { active === "hist" &&<History/> }
         </div>
     </div>
 }
