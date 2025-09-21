@@ -1,8 +1,11 @@
 const mongoose=require("mongoose");
 
+require('dotenv').config()
 
+// console.log(process.env)
+const MONGO_URL = process.env.MONGO_URL;
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(MONGO_URL);
 
 
 const userSchema=new mongoose.Schema({
@@ -46,10 +49,39 @@ const accountSchema=new mongoose.Schema({
     }
 });
 
+const TransferSchema = new mongoose.Schema({
+   senderId :{ 
+     type: mongoose.Schema.Types.ObjectId, // Reference to User model
+     ref: 'User',
+     required: true
+   },
+   recivedId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref : 'User',
+    require: true,
+   },
+   amount:{
+    type: Number,
+    require: true,
+    min:1,
+   },
+   createAt: {
+    type: Date,
+    default: Date.now,
+   },
+   status:{
+     type: String,
+     enum: ["SUCCESS", "FAILED", "PENDING"],
+     default: "SUCCESS"
+   },
+});  
+
 
 const User=mongoose.model('User',userSchema);
 const Account=mongoose.model('Account',accountSchema);
+const Transfer=mongoose.model('Transfer',TransferSchema);
 module.exports={
     User,
     Account,
+    Transfer,
 };

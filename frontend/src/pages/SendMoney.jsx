@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 
 
@@ -9,7 +9,7 @@ export function SendMoney(){
     const id=searchParams.get("id");
     const name=searchParams.get("name");
     const [amount,setAmount]=useState(0);
-
+   const navigate = useNavigate()
 
     return <div className="flex justify-center h-screen bg-gray-100">
         <div className="h-full flex flex-col justify-center"> 
@@ -34,7 +34,7 @@ export function SendMoney(){
                          }} type="number" id="amount" placeholder="Enter amount" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"/>
                        </div>
                        <button onClick={() => {
-                        axios.post("http://localhost:3000/api/v1/account/transfer",{
+                        const sucess = axios.post("http://localhost:3000/api/v1/account/transfer",{
                             to:id,
                             amount
                         },{
@@ -42,7 +42,10 @@ export function SendMoney(){
                                 Authorization:"Bearer " + localStorage.getItem("token")
                             }
                         })
-                        alert("Transaction successfull")
+                         if(sucess){
+                            navigate("/dashboard")
+                          alert("Transaction successfull")
+                         }
                        }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-blue-800 hover:bg-blue-500 text-white">
                         Intiate Transfer
                         </button>
